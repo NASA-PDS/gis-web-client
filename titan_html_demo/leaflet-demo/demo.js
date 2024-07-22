@@ -3,7 +3,7 @@ function getData() {
      * Gets the data from the pds4 registry
      */
 
-    fetch(url)
+    fetch(getUrl())
     .then(response => response.json())
     .then(out => {
         console.log(out);
@@ -28,13 +28,17 @@ function populateDropdown(data) {
         let search = document.getElementById("search");
         let query = search.value;
 
-        // if search is active, search for matching substr in description
+        // if search is active, search for matching substr in description or title
         if (query) {
-            const description_key = "pds:Service.pds:abstract_desc";
-            const description = String(data[i].properties[description_key][0]).toLowerCase();
             query = String(query).toLowerCase();
 
-            if (!(description.includes(query))) {
+            const descriptionKey = "pds:Service.pds:abstract_desc";
+            const description = String(data[i].properties[descriptionKey][0]).toLowerCase();
+
+            const layerName = data[i].title;
+
+            if (!(description.includes(query)) &&
+                !(layerName.includes(query))) {
                 continue;
             }
         }
@@ -56,7 +60,7 @@ function submitLayerForm(event){
      */
     event.preventDefault();
 
-    fetch(url)
+    fetch(getUrl())
     .then(response => response.json())
     .then(out => {
         const layerData = out.data[event.srcElement[0].value];
@@ -103,6 +107,10 @@ function submitLayerForm(event){
 
             var currLayer = L.tileLayer(imageURL, {
                 format: format,
+                bounds:[
+                    new L.LatLng(15.292019,145.834236),
+                    new L.LatLng(15.097866,145.676994)
+                ]
             }).addTo(map);
 
             // add layer to list
@@ -152,21 +160,26 @@ function onRemoveButton(event) {
     }
 }
 
+function getUrl() {
+    /**
+     * Gets the URL with the query for the selected target
+     */
 
-// initialize url
-const url = "http://localhost:8080/products?q=(product_class eq \"Product_Service\")";
+    let targetDropdown = document.getElementById("target-dropdown");
+    let target = targetDropdown.value;
+    let pdsQuery = "q=(pds:Target_Identification.pds:name eq \"" + target + "\")&limit=1000";
+
+    const url = "http://localhost:8080/products?" + pdsQuery;
+
+    console.log(url);
+    return url;
+}
 
 // initialize map
 var map = L.map('map');
 map.setMaxZoom(3);
 map.setMinZoom(0);
 map.setView([0,0], 0);
-
-// initialize basemap
-var basemapURL = "https://trek.nasa.gov/tiles/Titan/EQ/TitanISS2018June.proj.scale/1.0.0//default/default028mm/{z}/{y}/{x}.jpg"
-var basemap = L.tileLayer(basemapURL, {
-    format: "image/jpeg"
-}).addTo(map);
 
 let layers = []
 
