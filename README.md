@@ -43,17 +43,25 @@ By default, this template includes a `.nvmrc` file that contains `lts/*`, meanin
 
 # 📽️ GIS Web Client
 
-This is a gui web client to use data from GIS services that are located in the PDS registry. Currently there is only a demo that will work for Titan Treks labels in the registry.
+This is a gui web client to use data from GIS services that are located in the PDS registry. Currently there is only a demo that will work for WMTS tilemaps in PDS.
 
 
 ## 💽 Prerequisites
 
-Currenty, the demo requires the use of a local PDS Registry being hosted. Please refer to the documentation in the [PDS Registry repository](https://github.com/NASA-PDS/registry) for information on how to get that set up.
+* Currenty, the demo requires the use of a local PDS Registry being hosted. Please refer to the documentation in the [PDS Registry repository](https://github.com/NASA-PDS/registry) for information on how to get that set up.
+
+* After cloning the registry repository, build it with the instruction found here: [PDS Registry Docker Build Instructions](https://github.com/NASA-PDS/registry/blob/main/docker/README.md)
+
+* To create the PDS4 labels of the Treks services, run the registry's utility script for Treks with the command:
+```
+create-treks-pds4 -t all
+```
+
 
 
 ## 🏎️ User Quickstart
 
-To run the demo, simply open the `index.html` in any browser you choose. Leaflet does not need to be installed, but a local registry must be set up with Titan Treks layer data loaded in. Refer to **Prerequisites** above for details.
+To run the demo, simply open the `index.html` in any browser you choose. Leaflet does not need to be installed, but a local registry must be set up with Treks layer data loaded in. Refer to **Prerequisites** above for details.
 
 **👉 Note:** There may be cross-origin cors issues loading in the data. Most browsers have extensions to disable these issues on a web page. You might need to install one of these.
 
