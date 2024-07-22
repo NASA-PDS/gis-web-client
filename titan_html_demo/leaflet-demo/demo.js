@@ -106,11 +106,7 @@ function submitLayerForm(event){
             console.log(imageURL);
 
             var currLayer = L.tileLayer(imageURL, {
-                format: format,
-                bounds:[
-                    new L.LatLng(15.292019,145.834236),
-                    new L.LatLng(15.097866,145.676994)
-                ]
+                format: format
             }).addTo(map);
 
             // add layer to list
