@@ -1,17 +1,17 @@
 # PDS Template Repository for Node.js
 
-This is the template repository for PDS's Node.js projects. The goal of this repository is to be a base of Node.js repositories developed by the Planetary Data System.
+The goal of this repository is to create a GUI for GIS data in the PDS registry.
 4
-**👉 Note:** Please replace this entire `README.md` with text appropriate for your package!
+<!-- **👉 Note:** Please replace this entire `README.md` with text appropriate for your package!
 
 **👉 Also note:** Check _every_ other file and replace text appropriate for your package!
 
-This `README.md` documents the _template repository_ and contains instructions on how to use it after you've duplicated the template into a new project-specific repository. How do you do that? Simply click the <kbd>Use this template</kbd> button ↑ (or use [this hyperlink](https://github.com/NASA-PDS/template-repo-nodejs/generate)) and you've got a new repository already kitted-out with this template.
+This `README.md` documents the _template repository_ and contains instructions on how to use it after you've duplicated the template into a new project-specific repository. How do you do that? Simply click the <kbd>Use this template</kbd> button ↑ (or use [this hyperlink](https://github.com/NASA-PDS/template-repo-nodejs/generate)) and you've got a new repository already kitted-out with this template. -->
 
-
+<!--
 ## 🏃 Getting Started With This Template
 
-Our [wiki on Git and GitHub](https://github.com/NASA-PDS/nasa-pds.github.io/wiki/Git-and-Github-Guide#creating-a-new-repo) has lots of useful information on setting up a new repository using the PDS Engineering Node templates.
+Our [wiki on Git and GitHub](https://github.com/NASA-PDS/nasa-pds.github.io/wiki/Git-and-Github-Guide#creating-a-new-repo) has lots of useful information on setting up a new repository using the PDS Engineering Node templates. -->
 
 **👉 Important!** You must assign the teams as mentioned on the wiki page above! At a minimum, these are:
 
@@ -21,7 +21,7 @@ Our [wiki on Git and GitHub](https://github.com/NASA-PDS/nasa-pds.github.io/wiki
 | `@NASA-PDS/pds-software-pmc`        | `admin`    |
 | `@NASA-PDS/pds-operations`          | `admin`    |
 
-This template was populated with [Vite](https://vitejs.dev) with [React](https://react.dev). If neither of these apply to your Node.js project, feel free to edit those out.
+<!-- This template was populated with [Vite](https://vitejs.dev) with [React](https://react.dev). If neither of these apply to your Node.js project, feel free to edit those out. -->
 
 We recommend the use of [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm), since different projects within the Planetary Data System require different versions of Node.js. This tool allows you to use a specific version of Node.js for each terminal session on your machine. ***If you haven't already, [install or update nvm](https://github.com/nvm-sh/nvm#installing-and-updating).***
 
@@ -41,34 +41,31 @@ By default, this template includes a `.nvmrc` file that contains `lts/*`, meanin
 
 ---
 
-# 📽️ My Project
+# 📽️ GIS Web Client
 
-This is the XYZ that does this, that, and the other thing for the Planetary Data System.
-
-Please visit our website at: https://nasa-pds.github.io/pds-my-project
-
-It has useful information for developers and end-users.
+This is a gui web client to use data from GIS services that are located in the PDS registry. Currently there is only a demo that will work for WMTS tilemaps in PDS.
 
 
 ## 💽 Prerequisites
 
-Here, mention any system-wide requirements (`brew install`, `apt-get install`, `yum install`, …) needed to work with this ppackage.
+* Currenty, the demo requires the use of a local PDS Registry being hosted. Please refer to the documentation in the [PDS Registry repository](https://github.com/NASA-PDS/registry) for information on how to get that set up.
+
+* After cloning the registry repository, build it with the instruction found here: [PDS Registry Docker Build Instructions](https://github.com/NASA-PDS/registry/blob/main/docker/README.md)
+
+* To create the PDS4 labels of the Treks services, run the registry's utility script for Treks with the command:
+```
+create-treks-pds4 -t all
+```
+
 
 
 ## 🏎️ User Quickstart
 
-(Here, give a guide to end-users how to quickly get up to speed with your package.)
+To run the demo, simply open the `index.html` in any browser you choose. Leaflet does not need to be installed, but a local registry must be set up with Treks layer data loaded in. Refer to **Prerequisites** above for details.
 
-You can quickly install this by typing
+**👉 Note:** There may be cross-origin cors issues loading in the data. Most browsers have extensions to disable these issues on a web page. You might need to install one of these.
 
-    npm install
-
-(If possible, make it so that your program works out of the box without any additional configuration.)
-
-
-To execute, run:
-
-    (put your run commands here)
+For Firefox, I use CORS Everywhere
 
 
 ## ✋ Code of Conduct
