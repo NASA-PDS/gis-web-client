@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+     <title>GIS PDS4 Demo</title>
+
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+</head>
+
+<body>
+
+    <div class="content">
+        <h1 class="title">GIS PDS4 Demo</h1>
+
+        <form id="select-target-form">
+            <label for="target-dropdown">Choose a target:</label>
+            <select name="target-dropdown" id="target-dropdown" class="user-input" oninput="getData()">
+                <option value="Mars">Mars</option>
+                <option value="Mercury">Mercury</option>
+                <option value="Venus">Venus</option>
+                <option value="Moon">Moon</option>
+                <option value="Phobos">Phobos</option>
+                <option value="Titan">Titan</option>
+                <option value="Ceres">Ceres</option>
+                <option value="Ryugu">Ryugu</option>
+                <option value="Vesta">Vesta</option>
+            </select>
+        </form>
+
+        <form id="search-pds4-form">
+            <label>Search For Layer:</label>
+            <input type="text" placeholder="Albedo mosaic..." name="search" id="search" class="user-input">
+            <input type="submit" value="Search" class="user-input" />
+        </form>
+
+        <form id="select-layer-form">
+            <label for="titan-layers-dropdown">Choose a layer:</label>
+            <select name="titan-layers-dropdown" id="titan-layers-dropdown" class="user-input"></select>
+            <input type="submit" value="Submit" class="user-input"/>
+        </form>
+
+        <p>LAZ layers need to be exported to QGIS to view.</p>
+
+        <h2 id="layer-list-title"></h2>
+        <div id="layer-list"></div>
+        <div id="export-all-container"></div>
+        <div id="remove-button-container"></div>
+
+
+        <div id="map"></div>
+    </div>
+
+    <script src="demo.js"></script>
+
+</body>
+
+</html>
