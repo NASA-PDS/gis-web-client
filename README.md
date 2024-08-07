@@ -43,7 +43,7 @@ By default, this template includes a `.nvmrc` file that contains `lts/*`, meanin
 
 # 📽️ GIS Web Client
 
-This is a gui web client to use data from GIS services that are located in the PDS registry. Currently there is only a demo that will work for WMTS tilemaps in PDS.
+This is a gui web client to use data from GIS services that are located in the PDS registry. Currently the demo displays the layers given from the [utility scripts](https://github.com/NASA-PDS/registry/tree/main/src/pds/registry/utils) in the [PDS Registry repository](https://github.com/NASA-PDS/registry).
 
 
 ## 💽 Prerequisites
@@ -52,16 +52,25 @@ This is a gui web client to use data from GIS services that are located in the P
 
 * After cloning the registry repository, build it with the instruction found here: [PDS Registry Docker Build Instructions](https://github.com/NASA-PDS/registry/blob/main/docker/README.md)
 
+* From the root directory, install needed dependencies with the command:
+```
+pip install .
+```
+
 * To create the PDS4 labels of the Treks services, run the registry's utility script for Treks with the command:
 ```
 create-treks-pds4 -t all
 ```
 
+* To create the PDS4 labels of the GeoSTAC LOLA services, run the registry's utility script for Treks with the command:
+```
+create-lola-pds4
+```
 
 
 ## 🏎️ User Quickstart
 
-To run the demo, simply open the `index.html` in any browser you choose. Leaflet does not need to be installed, but a local registry must be set up with Treks layer data loaded in. Refer to **Prerequisites** above for details.
+To run the demo, simply open the `index.html` in any browser you choose. Leaflet does not need to be installed, but a local registry must be set up with pds4 data loaded in. Refer to **Prerequisites** above for details.
 
 **👉 Note:** There may be cross-origin cors issues loading in the data. Most browsers have extensions to disable these issues on a web page. You might need to install one of these.
 

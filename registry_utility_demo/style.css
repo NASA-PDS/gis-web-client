@@ -48,6 +48,7 @@ input {
     padding: 5px;
 
     font-size: 1rem;
+    text-decoration: none;
     color: black;
     background-color: white;
 
@@ -73,6 +74,19 @@ input {
     background-color: white;
 }
 
+.layer-element-wrapper {
+    display: flex;
+    flex-flow: row;
+
+    justify-content: left;
+    align-items: center;
+}
+
+.layer-link {
+    width: 75%;
+}
+
+
 #map {
     height: 30rem;
     width: 80%;
@@ -96,7 +110,7 @@ input {
 #layer-list {
     display: flex;
     flex-flow: column;
-    width: 50%;
+    width: 75%;
     height: 100px;
     overflow-y: scroll;
 }
