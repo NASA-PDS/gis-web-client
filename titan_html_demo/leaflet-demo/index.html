@@ -38,7 +38,8 @@
 
         <form id="search-pds4-form">
             <label>Search For Layer:</label>
-            <input type="text" placeholder="Albedo mosaic..." name="search" id="search" class="user-input" oninput="getData()">
+            <input type="text" placeholder="Albedo mosaic..." name="search" id="search" class="user-input">
+            <input type="submit" value="Search" class="user-input" />
         </form>
 
         <form id="select-layer-form">
@@ -47,9 +48,12 @@
             <input type="submit" value="Submit" class="user-input"/>
         </form>
 
+        <p>LAZ layers need to be exported to QGIS to view.</p>
+
         <h2 id="layer-list-title"></h2>
         <div id="layer-list"></div>
-        <div id="button-container"></div>
+        <div id="export-all-container"></div>
+        <div id="remove-button-container"></div>
 
 
         <div id="map"></div>
