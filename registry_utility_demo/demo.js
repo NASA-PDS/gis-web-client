@@ -548,7 +548,7 @@ function createQGSFIle(laz, wms) {
     }
 
     if (exportWms) {
-        for(let i = 0; i < wmsNames.length; i++) {
+        for(let i = wmsNames.length-1; i >= 0; i--) {
             let name = wmsNames[i];
             let title = wmsTitles[i];
             let id = `_00000000_0000_0000_0000_00000000000${i}`;
@@ -572,15 +572,15 @@ function createQGSFIle(laz, wms) {
 
     if (exportLaz) {
         for(let i = 0; i < lazNames.length; i++) {
-            let name = wmsNames[i];
-            let title = wmsURLs[i];
+            let name = lazNames[i];
+            let url = lazURLs[i];
             let id = `${name}_661150f5_9e6e_42e0_a975_171e332cf765`;
 
             let mapLayer = `<maplayer minScale="100000000" refreshOnNotifyMessage="" legendPlaceholderImage="" maxScale="0" autoRefreshTime="0" type="point-cloud" autoRefreshMode="Disabled" sync3DRendererTo2DRenderer="1" styleCategories="AllStyleCategories" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0">\n`;
 
             let mapLayerId = `<id>${id}</id>\n`;
             let datasource = `<datasource>${url}</datasource>\n`;
-            let layerName = `<layername>${title}</layername>\n`;
+            let layerName = `<layername>${name}</layername>\n`;
             let provider = `<provider>copc</provider>\n`;
 
             mapLayer += mapLayerId;
@@ -633,7 +633,7 @@ function createQGSFIle(laz, wms) {
     }
 
     if (exportWms) {
-        for(let i = 0; i < wmsNames.length; i++) {
+        for(let i = wmsNames.length-1; i >= 0; i--) {
             let id = `_00000000_0000_0000_0000_00000000000${i}`;
             let layer = `<layer id="${id}"/>\n`;
             layerOrder += layer;
