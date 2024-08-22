@@ -84,6 +84,17 @@ input {
 
 .layer-link {
     width: 75%;
+    background: none;
+    border: none;
+    text-align: left;
+    text-decoration: underline;
+    font-size: 1rem;
+    color: white;
+}
+
+.layer-link:hover {
+    cursor: pointer;
+    color: rgb(145, 145, 145);
 }
 
 
