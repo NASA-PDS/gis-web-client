@@ -44,6 +44,9 @@ function populateDropdown(data) {
         else if (data[i]["type"].toLowerCase() === "product_external") {
             productType = "LAZ";
         }
+        else {
+            continue;
+        }
 
         // if search is active, search for matching substr in description or title
         if (query) {
@@ -206,13 +209,38 @@ function addWMTSLayer(layerData, out, event) {
         let layerElement = document.createElement("div");
         layerElement.className = "layer-element-wrapper";
 
-        // layer link
-        let layerPDS4Link = document.createElement("a");
+        // layer popup
+        let layerPDS4Link = document.createElement("button");
         layerPDS4Link.className = "layer-link";
-        layerPDS4Link.href = "http://localhost:8080/products/" + layerData.properties["lidvid"][0];
-        layerPDS4Link.target = "_blank";  // open in new window
+        layerPDS4Link.onclick = () => {
+            let newWindow = open('/', 'example', 'width=300,height=300')
+            newWindow.focus();
+            newWindow.onload = function() {
+                let popTitle = out.data[event.srcElement[0].value].title;
+                let popLidvid = out.data[event.srcElement[0].value].properties.lidvid[0];
+                let popDescription = out.data[event.srcElement[0].value].properties.description[0]
+                let html = `<div>
+                                <h1>${popTitle}</h1>
+                                <h2>Lidvid</h2>
+                                <p>${popLidvid}</p>
+                                <h2>Description:</h2>
+                                <p>${popDescription}</p>
+                                <h2>Related Data:</h2>`
+
+                // go through related references
+                html += `<ul>`;
+                let references = out.data[event.srcElement[0].value].properties["pds:Internal_Reference.pds:lid_reference"];
+                for (let i = 0; i < references.length; i++) {
+                    html += `<li>${references[i]}</li>`
+                }
+
+                html += `</ul></div>`;
+                newWindow.document.body.insertAdjacentHTML('afterbegin', html);
+            };
+        };
         layerPDS4Link.textContent = out.data[event.srcElement[0].value].title;
         layerPDS4Link.id = out.data[event.srcElement[0].value].title;
+        layerElement.appendChild(layerPDS4Link);
 
         layerElement.appendChild(layerPDS4Link);
 
@@ -245,14 +273,26 @@ function addWMSLayer(layerData, out, event) {
     let layerElement = document.createElement("div");
     layerElement.className = "layer-element-wrapper";
 
-    // layer link
-    let layerPDS4Link = document.createElement("a");
+    // layer popup
+    let layerPDS4Link = document.createElement("button");
     layerPDS4Link.className = "layer-link";
-    layerPDS4Link.href = "http://localhost:8080/products/" + layerData.lidvid;
-    layerPDS4Link.target = "_blank";  // open in new window
+    layerPDS4Link.onclick = () => {
+        let newWindow = open('/', 'example', 'width=300,height=300')
+        newWindow.focus();
+        newWindow.onload = function() {
+        let html = `<div>
+                        <h1>${layerData.layerTitle}</h1>
+                        <h2>Lidvid</h2>
+                        <p>${layerData.lidvid}</p>
+                        <h2>Description:</h2>
+                        <p>${out.data[0].properties["pds:Service.pds:abstract_desc"][0]}</p>
+                        <h2>Related Data:</h2>
+                    </div>`;
+        newWindow.document.body.insertAdjacentHTML('afterbegin', html);
+        };
+    };
     layerPDS4Link.textContent = layerData.layerTitle;
     layerPDS4Link.id = layerData.layerName;
-
     layerElement.appendChild(layerPDS4Link);
 
     // create qgis file
@@ -298,11 +338,36 @@ function addLAZLayer(layerData, out, event) {
     let layerElement = document.createElement("div");
     layerElement.className = "layer-element-wrapper";
 
-    // layer link
-    let layerPDS4Link = document.createElement("a");
+    // layer popup
+    let layerPDS4Link = document.createElement("button");
     layerPDS4Link.className = "layer-link";
-    layerPDS4Link.href = "http://localhost:8080/products/" + layerData.properties["lidvid"][0];
-    layerPDS4Link.target = "_blank";  // open in new window
+    layerPDS4Link.onclick = () => {
+        let newWindow = open('/', 'example', 'width=300,height=300')
+        newWindow.focus();
+        newWindow.onload = function() {
+            let popTitle = out.data[event.srcElement[0].value].title;
+            let popLidvid = out.data[event.srcElement[0].value].properties.lidvid[0];
+            let popDescription = out.data[event.srcElement[0].value].properties.description[0]
+            let html = `<div>
+                            <h1>${popTitle}</h1>
+                            <h2>Lidvid</h2>
+                            <p>${popLidvid}</p>
+                            <h2>Description:</h2>
+                            <p>${popDescription}</p>
+                            <h2>Related Data:</h2>`
+
+            // go through related references
+            html += `<ul>`;
+            let references = out.data[event.srcElement[0].value].properties["pds:Internal_Reference.pds:lid_reference"];
+            for (let i = 0; i < references.length; i++) {
+                html += `<li>${references[i]}</li>`
+            }
+
+            html += `</ul></div>`;
+            newWindow.document.body.insertAdjacentHTML('afterbegin', html);
+        };
+    };
+    console.log(out.data[event.srcElement[0].value].properties);
     layerPDS4Link.textContent = out.data[event.srcElement[0].value].title;
     layerPDS4Link.id = out.data[event.srcElement[0].value].title;
     layerElement.appendChild(layerPDS4Link);
@@ -472,7 +537,7 @@ function getUrl() {
         "Titan": "q=(ref_lid_target eq \"urn:nasa:pds:context:target:satellite.saturn.titan\")&limit=10000",
         "Ceres": "q=(pds:Target_Identification.pds:name eq \"Ceres\")&limit=10000",  // lid_ref was not found in pds
         "Ryugu": "q=(pds:Target_Identification.pds:name eq \"Ryugu\")&limit=10000",
-        "Vesta": "q=(pds:Target_Identification.pds:name eq \"Vesta\")&limit=10000"
+        "Vesta": "q=(pds:Target_Identification.pds:name eq \"Vesta\")&limit=10000",
     }
 
     let pdsQuery = target_map[target];
